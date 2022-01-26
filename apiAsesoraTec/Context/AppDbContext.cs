@@ -14,5 +14,7 @@ namespace apiAsesoraTec.Context
 
         }
         public DbSet<Sexo> Sexo { get; set; }
+
+        public DbSet<Usuario> Usuario { get; set; }
     }
 }
