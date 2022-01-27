@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace apiAsesoraTec.Models
 {
-    public class Usuario
+    public class Usuarios
     {
         [Key]
         public int idUsuario { get; set; }
-
         public string nombre { get; set; }
         public string apellidoPat { get; set; }
         public string apellidoMat { get; set; }
