@@ -16,8 +16,6 @@ namespace apiAsesoraTec.Models
         public string correo { get; set; }
         public string contrasenia { get; set; }
         public string foto { get; set; }
-        public int idSexo { get; set; }
-
-
+        public virtual Sexo Sexo { get; set; }
     }
 }

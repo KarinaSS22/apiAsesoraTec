@@ -12,5 +12,7 @@ namespace apiAsesoraTec.Models
         public int idSexo { get; set; }
 
         public char sexo { get; set; }
+
+      //  public List<Usuarios> Usuarios { set; get; }
     }
 }
