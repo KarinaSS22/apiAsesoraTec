@@ -13,22 +13,21 @@ namespace apiAsesoraTec.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SexoController : ControllerBase
+    public class CalificacionController : ControllerBase
     {
-
         private readonly AppDbContext context;
-        public SexoController(AppDbContext context)
+        public CalificacionController(AppDbContext context)
         {
             this.context = context;
         }
 
-        // GET: api/<SexoController>
+        // GET: api/<CalificacionController>
         [HttpGet]
         public ActionResult Get()
         {
             try
             {
-                return Ok(context.sexo.ToList());
+                return Ok(context.calificacion.ToList());
             }
             catch (Exception ex)
             {
@@ -36,14 +35,13 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // GET api/<SexoController>/5
-        [HttpGet("{id}", Name = "GetSexo")]
+        [HttpGet("{id}", Name = "GetCalificacion")]
         public ActionResult Get(int id)
         {
             try
             {
-                var sexo = context.sexo.FirstOrDefault(s => s.idSexo == id);
-                return Ok(sexo);
+                var calificacion = context.calificacion.FirstOrDefault(c => c.idCalificacion == id);
+                return Ok(calificacion);
             }
             catch (Exception ex)
             {
@@ -51,15 +49,15 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // POST api/<SexoController>
+        // POST api/<CalificacionController>
         [HttpPost]
-        public ActionResult Post([FromBody] Sexo sexo)
+        public ActionResult Post([FromBody] Calificacion calificacion)
         {
             try
             {
-                context.sexo.Add(sexo);
+                context.calificacion.Add(calificacion);
                 context.SaveChanges();
-                return CreatedAtRoute("GetSexo", new { id = sexo.idSexo }, sexo);
+                return CreatedAtRoute("GetCalificacion", new { id = calificacion.idCalificacion }, calificacion);
             }
             catch (Exception ex)
             {
@@ -67,17 +65,17 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // PUT api/<SexoController>/5
+        // PUT api/<CalificacionController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Sexo sexo)
+        public ActionResult Put(int id, [FromBody] Calificacion calificacion)
         {
             try
             {
-                if (sexo.idSexo == id)
+                if (calificacion.idCalificacion == id)
                 {
-                    context.Entry(sexo).State = EntityState.Modified;
+                    context.Entry(calificacion).State = EntityState.Modified;
                     context.SaveChanges();
-                    return CreatedAtRoute("GetSexo", new { id = sexo.idSexo }, sexo);
+                    return CreatedAtRoute("GetCalificacion", new { id = calificacion.idCalificacion }, calificacion);
                 }
                 else
                 {
@@ -90,16 +88,15 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // DELETE api/<SexoController>/5
-        [HttpDelete("{id}")]
+        // DELETE api/<CalificacionController>/5
         public ActionResult Delete(int id)
         {
             try
             {
-                var sexo = context.sexo.FirstOrDefault(s => s.idSexo == id);
-                if (sexo != null)
+                var calificacion = context.calificacion.FirstOrDefault(c => c.idCalificacion == id);
+                if (calificacion != null)
                 {
-                    context.sexo.Remove(sexo);
+                    context.calificacion.Remove(calificacion);
                     context.SaveChanges();
                     return Ok(id);
                 }

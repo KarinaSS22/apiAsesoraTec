@@ -13,22 +13,21 @@ namespace apiAsesoraTec.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SexoController : ControllerBase
+    public class ModoImpaController : ControllerBase
     {
-
         private readonly AppDbContext context;
-        public SexoController(AppDbContext context)
+        public ModoImpaController(AppDbContext context)
         {
             this.context = context;
         }
 
-        // GET: api/<SexoController>
+        // GET: api/<ModoImpaController>
         [HttpGet]
         public ActionResult Get()
         {
             try
             {
-                return Ok(context.sexo.ToList());
+                return Ok(context.modoImpa.ToList());
             }
             catch (Exception ex)
             {
@@ -36,14 +35,14 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // GET api/<SexoController>/5
-        [HttpGet("{id}", Name = "GetSexo")]
+        // GET api/<ModoImpaController>/5
+        [HttpGet("{id}", Name = "GetModoImpa")]
         public ActionResult Get(int id)
         {
             try
             {
-                var sexo = context.sexo.FirstOrDefault(s => s.idSexo == id);
-                return Ok(sexo);
+                var modoImpa = context.modoImpa.FirstOrDefault(mI => mI.idModoImpa == id);
+                return Ok(modoImpa);
             }
             catch (Exception ex)
             {
@@ -51,15 +50,15 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // POST api/<SexoController>
+        // POST api/<ModoImpaController>
         [HttpPost]
-        public ActionResult Post([FromBody] Sexo sexo)
+        public ActionResult Post([FromBody] ModoImpa modoImpa)
         {
             try
             {
-                context.sexo.Add(sexo);
+                context.modoImpa.Add(modoImpa);
                 context.SaveChanges();
-                return CreatedAtRoute("GetSexo", new { id = sexo.idSexo }, sexo);
+                return CreatedAtRoute("GetModoImpa", new { id = modoImpa.idModoImpa }, modoImpa);
             }
             catch (Exception ex)
             {
@@ -67,17 +66,17 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // PUT api/<SexoController>/5
+        // PUT api/<ModoImpaController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Sexo sexo)
+        public ActionResult Put(int id, [FromBody] ModoImpa modoImpa)
         {
             try
             {
-                if (sexo.idSexo == id)
+                if (modoImpa.idModoImpa == id)
                 {
-                    context.Entry(sexo).State = EntityState.Modified;
+                    context.Entry(modoImpa).State = EntityState.Modified;
                     context.SaveChanges();
-                    return CreatedAtRoute("GetSexo", new { id = sexo.idSexo }, sexo);
+                    return CreatedAtRoute("GetModoImpa", new { id = modoImpa.idModoImpa }, modoImpa);
                 }
                 else
                 {
@@ -90,16 +89,16 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // DELETE api/<SexoController>/5
+        // DELETE api/<ModoImpaController>/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
             try
             {
-                var sexo = context.sexo.FirstOrDefault(s => s.idSexo == id);
-                if (sexo != null)
+                var modoImpa = context.modoImpa.FirstOrDefault(mI => mI.idModoImpa == id);
+                if (modoImpa != null)
                 {
-                    context.sexo.Remove(sexo);
+                    context.modoImpa.Remove(modoImpa);
                     context.SaveChanges();
                     return Ok(id);
                 }

@@ -7,28 +7,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace apiAsesoraTec.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SexoController : ControllerBase
+    public class CarreraController : ControllerBase
     {
 
         private readonly AppDbContext context;
-        public SexoController(AppDbContext context)
+        public CarreraController (AppDbContext context)
         {
             this.context = context;
         }
 
-        // GET: api/<SexoController>
+        // GET: api/<CarreraController>
         [HttpGet]
         public ActionResult Get()
         {
             try
             {
-                return Ok(context.sexo.ToList());
+                return Ok(context.carrera.ToList());
             }
             catch (Exception ex)
             {
@@ -36,14 +37,14 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // GET api/<SexoController>/5
-        [HttpGet("{id}", Name = "GetSexo")]
+        // GET api/<CarreraController>/5
+        [HttpGet("{id}", Name = "GetCarrera")]
         public ActionResult Get(int id)
         {
             try
             {
-                var sexo = context.sexo.FirstOrDefault(s => s.idSexo == id);
-                return Ok(sexo);
+                var carrera = context.carrera.FirstOrDefault(c => c.idCarrera == id);
+                return Ok(carrera);
             }
             catch (Exception ex)
             {
@@ -51,15 +52,15 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // POST api/<SexoController>
+        // POST api/<CarreraController>
         [HttpPost]
-        public ActionResult Post([FromBody] Sexo sexo)
+        public ActionResult Post([FromBody] Carrera carrera)
         {
             try
             {
-                context.sexo.Add(sexo);
+                context.carrera.Add(carrera);
                 context.SaveChanges();
-                return CreatedAtRoute("GetSexo", new { id = sexo.idSexo }, sexo);
+                return CreatedAtRoute("GetCarrera", new { id = carrera.idCarrera }, carrera);
             }
             catch (Exception ex)
             {
@@ -67,17 +68,17 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // PUT api/<SexoController>/5
+        // PUT api/<CarreraController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Sexo sexo)
+        public ActionResult Put(int id, [FromBody] Carrera carrera)
         {
             try
             {
-                if (sexo.idSexo == id)
+                if (carrera.idCarrera == id)
                 {
-                    context.Entry(sexo).State = EntityState.Modified;
+                    context.Entry(carrera).State = EntityState.Modified;
                     context.SaveChanges();
-                    return CreatedAtRoute("GetSexo", new { id = sexo.idSexo }, sexo);
+                    return CreatedAtRoute("GetCarrera", new { id = carrera.idCarrera }, carrera);
                 }
                 else
                 {
@@ -90,16 +91,17 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // DELETE api/<SexoController>/5
+
+        // DELETE api/<CarreraController>/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
             try
             {
-                var sexo = context.sexo.FirstOrDefault(s => s.idSexo == id);
-                if (sexo != null)
+                var carrera = context.carrera.FirstOrDefault(c => c.idCarrera == id);
+                if (carrera != null)
                 {
-                    context.sexo.Remove(sexo);
+                    context.carrera.Remove(carrera);
                     context.SaveChanges();
                     return Ok(id);
                 }

@@ -13,22 +13,22 @@ namespace apiAsesoraTec.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SexoController : ControllerBase
+    public class CreditosController : ControllerBase
     {
 
         private readonly AppDbContext context;
-        public SexoController(AppDbContext context)
+        public CreditosController(AppDbContext context)
         {
             this.context = context;
         }
 
-        // GET: api/<SexoController>
+        // GET: api/<CreditosController>
         [HttpGet]
         public ActionResult Get()
         {
             try
             {
-                return Ok(context.sexo.ToList());
+                return Ok(context.creditos.ToList());
             }
             catch (Exception ex)
             {
@@ -36,48 +36,46 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // GET api/<SexoController>/5
-        [HttpGet("{id}", Name = "GetSexo")]
+        // GET api/<CreditosController>/5
+        [HttpGet("{id}", Name = "GetCreditos")]
         public ActionResult Get(int id)
         {
             try
             {
-                var sexo = context.sexo.FirstOrDefault(s => s.idSexo == id);
-                return Ok(sexo);
+                var creditos = context.creditos.FirstOrDefault(c => c.idCreditos == id);
+                return Ok(creditos);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-
-        // POST api/<SexoController>
+        // POST api/<CreditosController>
         [HttpPost]
-        public ActionResult Post([FromBody] Sexo sexo)
+        public ActionResult Post([FromBody] Creditos creditos)
         {
             try
             {
-                context.sexo.Add(sexo);
+                context.creditos.Add(creditos);
                 context.SaveChanges();
-                return CreatedAtRoute("GetSexo", new { id = sexo.idSexo }, sexo);
+                return CreatedAtRoute("GetCreditos", new { id = creditos.idCreditos }, creditos);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-
-        // PUT api/<SexoController>/5
+        // PUT api/<CreditosController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Sexo sexo)
+        public ActionResult Put(int id, [FromBody] Creditos creditos)
         {
             try
             {
-                if (sexo.idSexo == id)
+                if (creditos.idCreditos == id)
                 {
-                    context.Entry(sexo).State = EntityState.Modified;
+                    context.Entry(creditos).State = EntityState.Modified;
                     context.SaveChanges();
-                    return CreatedAtRoute("GetSexo", new { id = sexo.idSexo }, sexo);
+                    return CreatedAtRoute("GetCreditos", new { id = creditos.idCreditos }, creditos);
                 }
                 else
                 {
@@ -90,16 +88,17 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // DELETE api/<SexoController>/5
+
+        // DELETE api/<CreditosController>/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
             try
             {
-                var sexo = context.sexo.FirstOrDefault(s => s.idSexo == id);
-                if (sexo != null)
+                var creditos = context.creditos.FirstOrDefault(c => c.idCreditos == id);
+                if (creditos != null)
                 {
-                    context.sexo.Remove(sexo);
+                    context.creditos.Remove(creditos);
                     context.SaveChanges();
                     return Ok(id);
                 }

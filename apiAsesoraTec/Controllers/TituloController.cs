@@ -13,102 +13,98 @@ namespace apiAsesoraTec.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SexoController : ControllerBase
+    public class TituloController : ControllerBase
     {
 
         private readonly AppDbContext context;
-        public SexoController(AppDbContext context)
+        public TituloController(AppDbContext context)
         {
             this.context = context;
         }
 
-        // GET: api/<SexoController>
+        // GET: api/<TituloController>
         [HttpGet]
         public ActionResult Get()
         {
             try
             {
-                return Ok(context.sexo.ToList());
+                return Ok(context.titulo.ToList());
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 return BadRequest(ex.Message);
             }
         }
 
-        // GET api/<SexoController>/5
-        [HttpGet("{id}", Name = "GetSexo")]
+        // GET api/<TituloController>/5
+        [HttpGet("{id}", Name = "GetTitulo")]
         public ActionResult Get(int id)
         {
             try
             {
-                var sexo = context.sexo.FirstOrDefault(s => s.idSexo == id);
-                return Ok(sexo);
-            }
-            catch (Exception ex)
+                var titulo = context.titulo.FirstOrDefault(t => t.idTitulo == id);
+                return Ok(titulo);
+            }catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
 
-        // POST api/<SexoController>
+        // POST api/<TituloController>
         [HttpPost]
-        public ActionResult Post([FromBody] Sexo sexo)
+        public ActionResult Post([FromBody] Titulo titulo)
         {
             try
             {
-                context.sexo.Add(sexo);
+                context.titulo.Add(titulo);
                 context.SaveChanges();
-                return CreatedAtRoute("GetSexo", new { id = sexo.idSexo }, sexo);
-            }
-            catch (Exception ex)
+                return CreatedAtRoute("GetTitulo", new { id = titulo.idTitulo }, titulo);
+            }catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
 
-        // PUT api/<SexoController>/5
+        // PUT api/<TituloController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Sexo sexo)
+        public ActionResult Put(int id, [FromBody] Titulo titulo)
         {
             try
             {
-                if (sexo.idSexo == id)
+                if (titulo.idTitulo == id)
                 {
-                    context.Entry(sexo).State = EntityState.Modified;
+                    context.Entry(titulo).State = EntityState.Modified;
                     context.SaveChanges();
-                    return CreatedAtRoute("GetSexo", new { id = sexo.idSexo }, sexo);
+                    return CreatedAtRoute("GetTitulo", new { id = titulo.idTitulo }, titulo);
                 }
                 else
                 {
                     return BadRequest();
                 }
-            }
-            catch (Exception ex)
+            }catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
 
-        // DELETE api/<SexoController>/5
+        // DELETE api/<TituloController>/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
             try
             {
-                var sexo = context.sexo.FirstOrDefault(s => s.idSexo == id);
-                if (sexo != null)
+                var titulo = context.titulo.FirstOrDefault(t => t.idTitulo == id);
+                if (titulo != null)
                 {
-                    context.sexo.Remove(sexo);
+                    context.titulo.Remove(titulo);
                     context.SaveChanges();
                     return Ok(id);
                 }
                 else
                 {
-                    return BadRequest();
+                    return BadRequest(); 
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 return BadRequest(ex.Message);
             }

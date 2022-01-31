@@ -13,22 +13,23 @@ namespace apiAsesoraTec.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SexoController : ControllerBase
+    public class SemestreController : ControllerBase
     {
 
         private readonly AppDbContext context;
-        public SexoController(AppDbContext context)
+
+        public SemestreController(AppDbContext context)
         {
             this.context = context;
         }
 
-        // GET: api/<SexoController>
+        // GET: api/<SemestreController>
         [HttpGet]
         public ActionResult Get()
         {
             try
             {
-                return Ok(context.sexo.ToList());
+                return Ok(context.semestre.ToList());
             }
             catch (Exception ex)
             {
@@ -36,14 +37,14 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // GET api/<SexoController>/5
-        [HttpGet("{id}", Name = "GetSexo")]
+        // GET api/<SemestreController>/5
+        [HttpGet("{id}", Name = "GetSemestre")]
         public ActionResult Get(int id)
         {
             try
             {
-                var sexo = context.sexo.FirstOrDefault(s => s.idSexo == id);
-                return Ok(sexo);
+                var semestre = context.semestre.FirstOrDefault(s => s.idSemestre == id);
+                return Ok(semestre);
             }
             catch (Exception ex)
             {
@@ -51,15 +52,15 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // POST api/<SexoController>
+        // POST api/<SemestreController>
         [HttpPost]
-        public ActionResult Post([FromBody] Sexo sexo)
+        public ActionResult Post([FromBody] Semestre semestre)
         {
             try
             {
-                context.sexo.Add(sexo);
+                context.semestre.Add(semestre);
                 context.SaveChanges();
-                return CreatedAtRoute("GetSexo", new { id = sexo.idSexo }, sexo);
+                return CreatedAtRoute("GetSemestre", new { id = semestre.idSemestre }, semestre);
             }
             catch (Exception ex)
             {
@@ -67,17 +68,17 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // PUT api/<SexoController>/5
+        // PUT api/<SemestreController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Sexo sexo)
+        public ActionResult Put(int id, [FromBody] Semestre semestre)
         {
             try
             {
-                if (sexo.idSexo == id)
+                if (semestre.idSemestre == id)
                 {
-                    context.Entry(sexo).State = EntityState.Modified;
+                    context.Entry(semestre).State = EntityState.Modified;
                     context.SaveChanges();
-                    return CreatedAtRoute("GetSexo", new { id = sexo.idSexo }, sexo);
+                    return CreatedAtRoute("GetSemestre", new { id = semestre.idSemestre }, semestre);
                 }
                 else
                 {
@@ -89,17 +90,16 @@ namespace apiAsesoraTec.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-        // DELETE api/<SexoController>/5
+        // DELETE api/<SemestreController>/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
             try
             {
-                var sexo = context.sexo.FirstOrDefault(s => s.idSexo == id);
-                if (sexo != null)
+                var semestre = context.semestre.FirstOrDefault(s => s.idSemestre == id);
+                if (semestre != null)
                 {
-                    context.sexo.Remove(sexo);
+                    context.semestre.Remove(semestre);
                     context.SaveChanges();
                     return Ok(id);
                 }

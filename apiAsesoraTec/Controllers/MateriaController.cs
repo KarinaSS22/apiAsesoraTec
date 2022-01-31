@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-//using System.Data.Entity;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,33 +13,34 @@ namespace apiAsesoraTec.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuarioController : ControllerBase
+    public class MateriaController : ControllerBase
     {
-
         private readonly AppDbContext context;
 
-        public UsuarioController(AppDbContext context)
+        public MateriaController(AppDbContext context)
         {
             this.context = context;
         }
 
-        // GET: api/<UsuarioController>
+        // GET: api/<MateriaController>
         [HttpGet]
-        public ActionResult<string> Get() { 
+        public ActionResult<string> Get()
+        {
             try
             {
-                var Usuarios_Sexo = (from Sexo in context.sexo
-                                     join Usuario in context.usuario
-                                        on Sexo.idSexo equals Usuario.idSexo
-                                     select new
+                var materia = (from Materia in context.materia
+                                     join NombreMat in context.nombreMat on Materia.idNombreMat equals NombreMat.idNombreMat
+                                     join Creditos in context.creditos on Materia.idCreditos equals Creditos.idCreditos
+                               select new
                                      {
-                                         Usuario.nombre,
-                                         Usuario.apellidoMat,
-                                         Usuario.apellidoPat,
-                                         Sexo.sexo,
-                                         CorreoUsuario = Usuario.correo
+                                        Materia.idMateria,
+                                        Materia.claveMat,
+                                        Materia.idNombreMat,
+                                        NombreMat.nombre,
+                                        Materia.idCreditos,
+                                        Creditos.creditos                         
                                      }).ToList();
-                return Ok(Usuarios_Sexo);
+                return Ok(materia);
             }
             catch (Exception ex)
             {
@@ -48,15 +48,14 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-
-        // GET api/<UsuarioController>/5
-        [HttpGet("{id}", Name = "GetUsuario")]
+        // GET api/<MateriaController>/5
+        [HttpGet("{id}", Name = "GetMateria")]
         public ActionResult Get(int id)
         {
             try
             {
-                var Usuario = context.usuario.FirstOrDefault(u => u.idUsuario == id);
-                return Ok(Usuario);
+                var materia = context.materia.FirstOrDefault(m => m.idMateria == id);
+                return Ok(materia);
             }
             catch (Exception ex)
             {
@@ -64,16 +63,15 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-
-        // POST api/<UsuarioController>
+        // POST api/<MateriaController>
         [HttpPost]
-        public ActionResult Post([FromBody] Usuario usuario)
+        public ActionResult Post([FromBody] Materia materia)
         {
             try
             {
-                context.usuario.Add(usuario);
+                context.materia.Add(materia);
                 context.SaveChanges();
-                return CreatedAtRoute("GeUsuario", new { id = usuario.idUsuario}, usuario);
+                return CreatedAtRoute("GeMateria", new { id = materia.idMateria }, materia);
             }
             catch (Exception ex)
             {
@@ -81,17 +79,17 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // PUT api/<UsuarioController>/5
+        // PUT api/<MateriaController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Usuario usuario)
+        public ActionResult Put(int id, [FromBody] Materia materia)
         {
             try
             {
-                if (usuario.idUsuario == id)
+                if (materia.idMateria == id)
                 {
-                    context.Entry(usuario).State = EntityState.Modified;
+                    context.Entry(materia).State = EntityState.Modified;
                     context.SaveChanges();
-                    return CreatedAtRoute("GetUsuario", new { id = usuario.idUsuario }, usuario);
+                    return CreatedAtRoute("GetMateria", new { id = materia.idMateria }, materia);
                 }
                 else
                 {
@@ -104,16 +102,16 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // DELETE api/<UsuarioController>/5
+        // DELETE api/<MateriaController>/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
             try
             {
-                var usuario = context.usuario.FirstOrDefault(u => u.idUsuario == id);
-                if (usuario != null)
+                var materia = context.materia.FirstOrDefault(m => m.idMateria == id);
+                if (materia != null)
                 {
-                    context.usuario.Remove(usuario);
+                    context.materia.Remove(materia);
                     context.SaveChanges();
                     return Ok(id);
                 }

@@ -13,22 +13,22 @@ namespace apiAsesoraTec.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SexoController : ControllerBase
+    public class NombreMatController : ControllerBase
     {
 
         private readonly AppDbContext context;
-        public SexoController(AppDbContext context)
+        public NombreMatController(AppDbContext context)
         {
             this.context = context;
         }
 
-        // GET: api/<SexoController>
+        // GET: api/<NombreMatController>
         [HttpGet]
         public ActionResult Get()
         {
             try
             {
-                return Ok(context.sexo.ToList());
+                return Ok(context.nombreMat.ToList());
             }
             catch (Exception ex)
             {
@@ -36,14 +36,14 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // GET api/<SexoController>/5
-        [HttpGet("{id}", Name = "GetSexo")]
+        // GET api/<NombreMatController>/5
+        [HttpGet("{id}", Name = "GetNombreMat")]
         public ActionResult Get(int id)
         {
             try
             {
-                var sexo = context.sexo.FirstOrDefault(s => s.idSexo == id);
-                return Ok(sexo);
+                var nombreMat = context.nombreMat.FirstOrDefault(nM => nM.idNombreMat == id);
+                return Ok(nombreMat);
             }
             catch (Exception ex)
             {
@@ -51,15 +51,15 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // POST api/<SexoController>
+        // POST api/<NombreMatController>
         [HttpPost]
-        public ActionResult Post([FromBody] Sexo sexo)
+        public ActionResult Post([FromBody] NombreMat nombreMat)
         {
             try
             {
-                context.sexo.Add(sexo);
+                context.nombreMat.Add(nombreMat);
                 context.SaveChanges();
-                return CreatedAtRoute("GetSexo", new { id = sexo.idSexo }, sexo);
+                return CreatedAtRoute("GetNombreMat", new { id = nombreMat.idNombreMat }, nombreMat);
             }
             catch (Exception ex)
             {
@@ -67,17 +67,17 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // PUT api/<SexoController>/5
+        // PUT api/<NombreMatController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Sexo sexo)
+        public ActionResult Put(int id, [FromBody] NombreMat nombreMat)
         {
             try
             {
-                if (sexo.idSexo == id)
+                if (nombreMat.idNombreMat == id)
                 {
-                    context.Entry(sexo).State = EntityState.Modified;
+                    context.Entry(nombreMat).State = EntityState.Modified;
                     context.SaveChanges();
-                    return CreatedAtRoute("GetSexo", new { id = sexo.idSexo }, sexo);
+                    return CreatedAtRoute("GetNombreMat", new { id = nombreMat.idNombreMat }, nombreMat);
                 }
                 else
                 {
@@ -90,16 +90,16 @@ namespace apiAsesoraTec.Controllers
             }
         }
 
-        // DELETE api/<SexoController>/5
+        // DELETE api/<NombreMatController>/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
             try
             {
-                var sexo = context.sexo.FirstOrDefault(s => s.idSexo == id);
-                if (sexo != null)
+                var nombreMat = context.nombreMat.FirstOrDefault(nM => nM.idNombreMat == id);
+                if (nombreMat!= null)
                 {
-                    context.sexo.Remove(sexo);
+                    context.nombreMat.Remove(nombreMat);
                     context.SaveChanges();
                     return Ok(id);
                 }

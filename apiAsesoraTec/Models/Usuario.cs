@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace apiAsesoraTec.Models
 {
-    public class Usuarios
+    public class Usuario
     {
         [Key]
         public int idUsuario { get; set; }
@@ -16,6 +16,6 @@ namespace apiAsesoraTec.Models
         public string correo { get; set; }
         public string contrasenia { get; set; }
         public string foto { get; set; }
-        public virtual Sexo Sexo { get; set; }
+        public int idSexo { get; set; }
     }
 }
