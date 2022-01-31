@@ -44,7 +44,7 @@ namespace apiAsesoraTec.Context
         public DbSet<Calificacion> calificacion { get; set; }
 
         public DbSet<ModoImpa> modoImpa { get; set; }
-
+        
     }
 
 }
