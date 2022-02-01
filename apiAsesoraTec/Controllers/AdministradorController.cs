@@ -28,21 +28,23 @@ namespace apiAsesoraTec.Controllers
             try
             {
                 var administrador = (from Administrador in context.administrador
-                                     join Usuario in context.usuario on Administrador.idUsuario equals Usuario.idUsuario
-                                     select new
-                                     {
-                                       Administrador.idAdministrador,
-                                       Administrador.numEmpleado,
-                                       Administrador.puesto,
-                                       Administrador.idUsuario,
-                                       Usuario.nombre,
-                                       Usuario.apellidoPat,
-                                       Usuario.apellidoMat,
-                                       Usuario.correo,
-                                       Usuario.contrasenia,
-                                       Usuario.foto,
-                                       Usuario.idSexo,
-                                     }).ToList();
+                              join Sexo in context.sexo on Administrador.idSexo equals Sexo.idSexo
+                              join Usuario in context.usuario on Administrador.idUsuario equals Usuario.idUsuario
+                              select new
+                              {
+                                  Administrador.idAdministrador,
+                                  Administrador.numEmpleado,
+                                  Administrador.nombre,
+                                  Administrador.apellidoPat,
+                                  Administrador.apellidoMat,
+                                  Administrador.puesto,
+                                  Administrador.idSexo,
+                                  Sexo.sexo,
+                                  Administrador.idUsuario,
+                                  Usuario.correo,
+                                  Usuario.contrasenia,
+                                  Usuario.foto
+                              }).ToList();
                 return Ok(administrador);
             }
             catch (Exception ex)

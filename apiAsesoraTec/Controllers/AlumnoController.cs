@@ -29,6 +29,7 @@ namespace apiAsesoraTec.Controllers
             try
             {
                 var alumno = (from Alumno in context.alumno
+                              join Sexo in context.sexo on Alumno.idSexo equals Sexo.idSexo
                               join Usuario in context.usuario on Alumno.idUsuario equals Usuario.idUsuario
                               join Semestre in context.semestre on Alumno.idSemestre equals Semestre.idSemestre
                               join Carrera in context.carrera on Alumno.idCarrera equals Carrera.idCarrera
@@ -37,21 +38,23 @@ namespace apiAsesoraTec.Controllers
                                     {
                                        Alumno.idAlumno,
                                        Alumno.numControl,
+                                       Alumno.nombre,
+                                       Alumno.apellidoPat,
+                                       Alumno.apellidoMat,
+                                       Alumno.idSexo,
                                        Alumno.idUsuario,
-                                       Usuario.nombre,
-                                       Usuario.apellidoPat,
-                                       Usuario.apellidoMat,
                                        Usuario.correo,
                                        Usuario.contrasenia,
                                        Usuario.foto,
-                                       Usuario.idSexo,
+                                       Alumno.idCarrera,
+                                       Carrera.claveCarrera,
+                                       NombreCarre=Carrera.nombre,
+                                       AbreviaturaCarre=Carrera.abreviatura,
                                        Alumno.idSemestre,
                                        Semestre.semestre,
-                                       Alumno.idCarrera,
-                                       //Carrera.nombre,
-                                       Carrera.abreviatura,
+                                       Especialidad.claveEspe,
                                        Alumno.idEspecialidad,
-                                       Especialidad.idNombreEspe
+                                       Especialidad.idNombreEspe,
                                     }).ToList();
                 return Ok(alumno);
             }

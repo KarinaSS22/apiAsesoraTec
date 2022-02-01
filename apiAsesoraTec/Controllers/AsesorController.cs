@@ -27,30 +27,28 @@ namespace apiAsesoraTec.Controllers
         {
             try
             {
-                var Asesor_Usu_Tit = (from Asesor in context.asesor
-                                      join Usuario in context.usuario on Asesor.idUsuario equals Usuario.idUsuario
+                var asesor = (from Asesor in context.asesor
                                       join Titulo in context.titulo on Asesor.idTitulo equals Titulo.idTitulo
-                                      from UsuarioAux in context.usuario
-                                      join Sexo in context.sexo on UsuarioAux.idSexo equals Sexo.idSexo
+                                      join Sexo in context.sexo on Asesor.idSexo equals Sexo.idSexo
+                                      join Usuario in context.usuario on Asesor.idUsuario equals Usuario.idUsuario
                                       select new
                                       {
                                           Asesor.idAsesor,
                                           Asesor.numReloj,
+                                          Asesor.nombre,
+                                          Asesor.apellidoPat,
+                                          Asesor.apellidoMat,
                                           Asesor.informacion,
+                                          Asesor.idTitulo,
+                                          Titulo.titulo,
+                                          Asesor.idSexo,
+                                          Sexo.sexo,
                                           Asesor.idUsuario,
-                                          Usuario.nombre,
-                                          Usuario.apellidoPat,
-                                          Usuario.apellidoMat,
                                           Usuario.correo,
                                           Usuario.contrasenia,
-                                          Usuario.foto,
-                                          Usuario.idSexo,
-                                          Sexo.sexo,
-                                          Asesor.idTitulo,
-                                          Titulo.titulo
-
+                                          Usuario.foto
                                       }).ToList();
-                return Ok(Asesor_Usu_Tit);
+                return Ok(asesor);
             }catch (Exception ex)
             {
                 return BadRequest(ex.Message);

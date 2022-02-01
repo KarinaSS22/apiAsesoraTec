@@ -13,11 +13,19 @@ namespace apiAsesoraTec.Models
 
         public int numReloj { get; set; }
 
+        public string nombre { get; set; }
+
+        public string apellidoPat { get; set; }
+
+        public string apellidoMat { get; set; }
+
         public string informacion { get; set; }
 
-        public int idUsuario { get; set; }
-
         public int idTitulo { get; set; }
+
+        public int idSexo { get; set; }
+
+        public int idUsuario { get; set; }
 
     }
 }

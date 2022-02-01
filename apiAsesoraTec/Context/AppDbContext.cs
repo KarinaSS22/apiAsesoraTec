@@ -44,7 +44,17 @@ namespace apiAsesoraTec.Context
         public DbSet<Calificacion> calificacion { get; set; }
 
         public DbSet<ModoImpa> modoImpa { get; set; }
-        
+
+        public DbSet<Ase_Carre> aseCarre { get; set; }
+
+        public DbSet<Mat_Espe> matEspe { get; set; }
+
+        public DbSet<Mat_Carre> matCarre { get; set; }
+
+        public DbSet<Ase_Mat> aseMat { get; set; }
+
+        public DbSet<Asesoria> asesoria { get; set; }
+
     }
 
 }

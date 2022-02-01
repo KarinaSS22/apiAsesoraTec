@@ -13,6 +13,14 @@ namespace apiAsesoraTec.Models
 
         public int numControl { get; set; }
 
+        public string nombre { get; set; }
+
+        public string apellidoPat { get; set; }
+
+        public string apellidoMat { get; set; }
+
+        public int idSexo { get; set; }
+
         public int idUsuario { get; set; }
 
         public int idSemestre { get; set; }

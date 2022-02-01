@@ -26,27 +26,18 @@ namespace apiAsesoraTec.Controllers
 
         // GET: api/<UsuarioController>
         [HttpGet]
-        public ActionResult<string> Get() { 
+        public ActionResult Get()
+        {
             try
             {
-                var Usuarios_Sexo = (from Sexo in context.sexo
-                                     join Usuario in context.usuario
-                                        on Sexo.idSexo equals Usuario.idSexo
-                                     select new
-                                     {
-                                         Usuario.nombre,
-                                         Usuario.apellidoMat,
-                                         Usuario.apellidoPat,
-                                         Sexo.sexo,
-                                         CorreoUsuario = Usuario.correo
-                                     }).ToList();
-                return Ok(Usuarios_Sexo);
+                return Ok(context.usuario.ToList());
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
+
 
 
         // GET api/<UsuarioController>/5
