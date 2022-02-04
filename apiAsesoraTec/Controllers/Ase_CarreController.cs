@@ -44,7 +44,7 @@ namespace apiAsesoraTec.Controllers
                                   Asesor.idSexo,
                                   Asesor.idUsuario,
                                   Ase_Carre.idCarrera,
-                                  Carrera.claveCarrera,
+                                  Carrera.claveCarre,
                                   NombreCarre = Carrera.nombre,
                                   AbreviaturaCarre = Carrera.abreviatura,
                               }).ToList();

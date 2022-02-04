@@ -39,7 +39,7 @@ namespace apiAsesoraTec.Controllers
                                         Especialidad.idNombreEspe,
                                         NombreEspe.nombre,
                                         Especialidad.idCarrera,
-                                        Carrera.claveCarrera,
+                                        Carrera.claveCarre,
                                         //Carrera.nombre,-->Corregir el nombre de variable
                                         Carrera.abreviatura
                                      }).ToList();

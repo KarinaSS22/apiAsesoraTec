@@ -10,7 +10,7 @@ namespace apiAsesoraTec.Models
     {
         [Key]
         public int idCarrera { get; set; }
-        public string claveCarrera { get; set; }
+        public string claveCarre { get; set; }
         public string nombre { get; set; }
         public string abreviatura { get; set; }
     }

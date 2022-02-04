@@ -40,7 +40,7 @@ namespace apiAsesoraTec.Controllers
                                    Materia.idNombreMat,
                                    Materia.idCreditos,
                                    Mat_Carre.idCarrera,
-                                   Carrera.claveCarrera,
+                                   Carrera.claveCarre,
                                    NombreCarre = Carrera.nombre,
                                    AbreviaturaCarre = Carrera.abreviatura,
                                }).ToList();
